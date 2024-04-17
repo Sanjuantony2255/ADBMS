@@ -1,0 +1,106 @@
+mysql> select * from regions;
++-----------+------------------------+
+| region_id | region_name            |
++-----------+------------------------+
+|         1 | Europe                 |
+|         2 | Americas               |
+|         3 | Asia                   |
+|         4 | Middle East and Africa |
++-----------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from countries;
++------------+--------------------------+-----------+
+| country_id | country_name             | region_id |
++------------+--------------------------+-----------+
+| BH         | Bahrain                  |         4 |
+| CA         | Canada                   |         2 |
+| CN         | China                    |         3 |
+| DE         | Germany                  |         1 |
+| EG         | Egypt                    |         4 |
+| FR         | France                   |         1 |
+| IN         | India                    |         3 |
+| SL         | SriLanka                 |         3 |
+| UK         | United Kingdom           |         1 |
+| US         | United States of America |         2 |
++------------+--------------------------+-----------+
+10 rows in set (0.01 sec)
+
+mysql> select * from locations;
+select * from locations;
+^C
+mysql> select * from countries;
++------------+--------------------------+-----------+
+| country_id | country_name             | region_id |
++------------+--------------------------+-----------+
+| BH         | Bahrain                  |         4 |
+| CA         | Canada                   |         2 |
+| CN         | China                    |         3 |
+| DE         | Germany                  |         1 |
+| EG         | Egypt                    |         4 |
+| FR         | France                   |         1 |
+| IN         | India                    |         3 |
+| SL         | SriLanka                 |         3 |
+| UK         | United Kingdom           |         1 |
+| US         | United States of America |         2 |
++------------+--------------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from jobs
+    -> ;
++--------+--------------------------+------------+------------+
+| job_id | job_title                | min_salary | max_salary |
++--------+--------------------------+------------+------------+
+|      1 | Manager                  |    8200.00 |   26000.00 |
+|      2 | Accountant               |    4200.00 |    9000.00 |
+|      3 | Administration Assistant |    3000.00 |    6000.00 |
+|      4 | President                |   20000.00 |   40000.00 |
+|      5 | Analyst                  |   15000.00 |   30000.00 |
+|      6 | Accountant               |    4200.00 |    9000.00 |
+|      7 | Manager                  |    8200.00 |   16000.00 |
+|      8 | Programmer               |    4000.00 |   10000.00 |
++--------+--------------------------+------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from departments;
++---------------+-----------------+-------------+
+| department_id | department_name | location_id |
++---------------+-----------------+-------------+
+|             1 | Administration  |        1700 |
+|             2 | Marketing       |        1800 |
+|             3 | HR              |        2400 |
+|             4 | IT              |        1400 |
+|             5 | Finance         |        1500 |
+|             6 | Accounting      |        1700 |
++---------------+-----------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+----------------------------------+--------------+------------+--------+----------+------------+---------------+
+| employee_id | first_name | last_name | email                            | phone_number | hire_date  | job_id | salary   | manager_id | department_id |
++-------------+------------+-----------+----------------------------------+--------------+------------+--------+----------+------------+---------------+
+|         101 | Steven     | King      | steven.king@sqltutorial.org      | 9151234567   | 1987-06-17 |      1 | 24000.00 |       NULL |             1 |
+|         102 | Lex        | De Haan   | lex.de haan@sqltutorial.org      | 9151234569   | 1993-01-13 |      5 | 17000.00 |        201 |             5 |
+|         103 | Alexander  | Hunold    | alexander.hunold@sqltutorial.org | 8904234567   | 1990-01-03 |      8 |  9000.00 |        101 |             6 |
+|         104 | Bruce      | Taylor    | bruce@taylor.org                 | 8904234568   | 1991-05-21 |      8 |  6000.00 |        101 |             4 |
+|         105 | David      | Austin    | david.austin@sqltutorial.org     | 7994234569   | 1997-06-25 |      2 |  4800.00 |        103 |             4 |
+|         106 | Zac        | Power     | zac@power.org                    | 9504234560   | 1998-02-05 |      2 |  4800.00 |        103 |          NULL |
+|         107 | Smith      | Lorentz   | smith@123.org                    | 8904235567   | 1999-02-07 |      5 | 20000.00 |        103 |             3 |
+|         108 | Nancy      | Greenberg | nancy.greenberg@sqltutorial.org  | 9720112469   | 1994-08-17 |      7 | 12000.00 |        101 |             2 |
+|         109 | Daniel     | Faviet    | daniel.faviet@sqltutorial.org    | 7151244169   | 1994-08-16 |      6 |  9000.00 |        108 |             2 |
+|         201 | Neena      | Kochhar   | neena.kochhar@sqltutorial.org    | 9151234568   | 1989-09-21 |      1 | 23000.00 |        101 |             5 |
++-------------+------------+-----------+----------------------------------+--------------+------------+--------+----------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from dependents;
++--------------+------------+-----------+--------------+-------------+
+| dependent_id | first_name | last_name | relationship | employee_id |
++--------------+------------+-----------+--------------+-------------+
+|            1 | Penelope   | Gietz     | Child        |         106 |
+|            2 | Nick       | Higgins   | Child        |         105 |
+|            3 | Ed         | Faviet    | Child        |         109 |
+|            4 | Jennifer   | King      | Child        |         101 |
+|            5 | Johnny     | Kochhar   | Child        |         201 |
++--------------+------------+-----------+--------------+-------------+
+5 rows in set (0.00 sec)
+

@@ -1,0 +1,336 @@
+
+mysql> use organization;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+1:-
+
+mysql> insert into Department values('d00','abc'),('d01','bcd'),('d02','cde'),('d03','def'),('d04','efg'),('d05','fgh'),('d06','ghi'),('d07','hij'),('d08','ijk'),('d09','jkl');
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from Department;
++---------+-----------+
+| dept_no | dept_name |
++---------+-----------+
+| d00     | abc       |
+| d01     | bcd       |
+| d02     | cde       |
+| d03     | def       |
+| d04     | efg       |
+| d05     | fgh       |
+| d06     | ghi       |
+| d07     | hij       |
+| d08     | ijk       |
+| d09     | jkl       |
++---------+-----------+
+10 rows in set (0.00 sec)
+
+2:-
+
+mysql> insert into Employee values ('emp0','Anu','1998-01-20','house1',973626219,'d00',84852,'Computer assistant'),('emp1','Ben','1999-03-16','house2',976431154,'d07',3804,'Guard'),('emp2','Arun','1999-04-06','house3',951444866,'d05',225650,'Computer assistant'),('emp3','Donny','1998-08-25','house4',973992942,'d09',44710,'Programmer'),('emp4','Rishi','1998-02-01','house5',917034694,'d04',306217,'Manager'),('emp5','Fathima','1997-12-02','house2',932838484,'d03',7000,'Technician'),('emp6','Gouri','1998-05-18','house6',974259079,'d04',117885,'Programmer'),('emp7','Haseena','1998-04-29','house7',980634051,'d02',2900,'Analyst'),('emp8','Indu','1997-03-05','house8',989579977,'d06',4655,'Technician'),('emp9','Joyal','1999-06-18','house9',971360021,'d05',308449,'Manager');
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp0   | Anu      | 1998-01-20 | house1  | 973626219 | d00     |  84852 | Computer assistant |
+| emp1   | Ben      | 1999-03-16 | house2  | 976431154 | d07     |   3804 | Guard              |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp3   | Donny    | 1998-08-25 | house4  | 973992942 | d09     |  44710 | Programmer         |
+| emp4   | Rishi    | 1998-02-01 | house5  | 917034694 | d04     | 306217 | Manager            |
+| emp5   | Fathima  | 1997-12-02 | house2  | 932838484 | d03     |   7000 | Technician         |
+| emp6   | Gouri    | 1998-05-18 | house6  | 974259079 | d04     | 117885 | Programmer         |
+| emp7   | Haseena  | 1998-04-29 | house7  | 980634051 | d02     |   2900 | Analyst            |
+| emp8   | Indu     | 1997-03-05 | house8  | 989579977 | d06     |   4655 | Technician         |
+| emp9   | Joyal    | 1999-06-18 | house9  | 971360021 | d05     | 308449 | Manager            |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+3:-
+
+mysql> select emp_no,emp_name from Employee where dept_no='d02';
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp7   | Haseena  |
++--------+----------+
+1 row in set (0.00 sec)
+
+4:-
+
+mysql> select emp_no,emp_name,Designation,dept_no,salary from Employee order by salary desc;
++--------+----------+--------------------+---------+--------+
+| emp_no | emp_name | Designation        | dept_no | salary |
++--------+----------+--------------------+---------+--------+
+| emp9   | Joyal    | Manager            | d05     | 308449 |
+| emp4   | Rishi    | Manager            | d04     | 306217 |
+| emp2   | Arun     | Computer assistant | d05     | 225650 |
+| emp6   | Gouri    | Programmer         | d04     | 117885 |
+| emp0   | Anu      | Computer assistant | d00     |  84852 |
+| emp3   | Donny    | Programmer         | d09     |  44710 |
+| emp5   | Fathima  | Technician         | d03     |   7000 |
+| emp8   | Indu     | Technician         | d06     |   4655 |
+| emp1   | Ben      | Guard              | d07     |   3804 |
+| emp7   | Haseena  | Analyst            | d02     |   2900 |
++--------+----------+--------------------+---------+--------+
+10 rows in set (0.00 sec)
+
+5:-
+
+mysql> select emp_no,emp_name from Employee where salary between 2000 and 5000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp1   | Ben      |
+| emp7   | Haseena  |
+| emp8   | Indu     |
++--------+----------+
+3 rows in set (0.00 sec)
+
+6:-
+
+mysql> select distinct Designation from Employee;
++--------------------+
+| Designation        |
++--------------------+
+| Computer assistant |
+| Guard              |
+| Programmer         |
+| Manager            |
+| Technician         |
+| Analyst            |
++--------------------+
+6 rows in set (0.00 sec)
+
+7:-
+
+mysql> update Employee set salary=45000 where Designation='Manager';
+Query OK, 2 rows affected (0.03 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+
+
+mysql> select * from Employee;
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp0   | Anu      | 1998-01-20 | house1  | 973626219 | d00     |  84852 | Computer assistant |
+| emp1   | Ben      | 1999-03-16 | house2  | 976431154 | d07     |   3804 | Guard              |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp3   | Donny    | 1998-08-25 | house4  | 973992942 | d09     |  44710 | Programmer         |
+| emp4   | Rishi    | 1998-02-01 | house5  | 917034694 | d04     |  45000 | Manager            |
+| emp5   | Fathima  | 1997-12-02 | house2  | 932838484 | d03     |   7000 | Technician         |
+| emp6   | Gouri    | 1998-05-18 | house6  | 974259079 | d04     | 117885 | Programmer         |
+| emp7   | Haseena  | 1998-04-29 | house7  | 980634051 | d02     |   2900 | Analyst            |
+| emp8   | Indu     | 1997-03-05 | house8  | 989579977 | d06     |   4655 | Technician         |
+| emp9   | Joyal    | 1999-06-18 | house9  | 971360021 | d05     |  45000 | Manager            |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+
+
+8:-
+
+mysql> update Employee set mobile_no='987654321' where emp_name='John';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql> select *from Employee where emp_name='John';
++--------+----------+------------+---------+-----------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation |
++--------+----------+------------+---------+-----------+---------+--------+-------------+
+| emp8   | John     | 1997-03-05 | house8  | 987654321 | d06     |   4655 | Technician  |
++--------+----------+------------+---------+-----------+---------+--------+-------------+
+1 row in set (0.00 sec)
+
+
+9:-
+
+mysql> delete from Employee where salary=7000;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Employee;
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp0   | Anu      | 1998-01-20 | house1  | 973626219 | d00     |  84852 | Computer assistant |
+| emp1   | Ben      | 1999-03-16 | house2  | 976431154 | d07     |   3804 | Guard              |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp3   | Donny    | 1998-08-25 | house4  | 973992942 | d09     |  44710 | Programmer         |
+| emp4   | Rishi    | 1998-02-01 | house5  | 917034694 | d04     |  45000 | Manager            |
+| emp6   | Gouri    | 1998-05-18 | house6  | 974259079 | d04     | 117885 | Programmer         |
+| emp7   | Haseena  | 1998-04-29 | house7  | 980634051 | d02     |   2900 | Analyst            |
+| emp8   | John     | 1997-03-05 | house8  | 987654321 | d06     |   4655 | Technician         |
+| emp9   | Joyal    | 1999-06-18 | house9  | 971360021 | d05     |  45000 | Manager            |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+9 rows in set (0.00 sec)
+
+
+10:-
+
+mysql> select emp_name,mobile_no from Employee where emp_name like 'A%';
++----------+-----------+
+| emp_name | mobile_no |
++----------+-----------+
+| Anu      | 973626219 |
+| Arun     | 951444866 |
++----------+-----------+
+2 rows in set (0.00 sec)
+
+
+11:-
+
+mysql> select * from Employee where emp_name like '___%' and salary>20000;
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp0   | Anu      | 1998-01-20 | house1  | 973626219 | d00     |  84852 | Computer assistant |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp3   | Donny    | 1998-08-25 | house4  | 973992942 | d09     |  44710 | Programmer         |
+| emp4   | Rishi    | 1998-02-01 | house5  | 917034694 | d04     |  45000 | Manager            |
+| emp6   | Gouri    | 1998-05-18 | house6  | 974259079 | d04     | 117885 | Programmer         |
+| emp9   | Joyal    | 1999-06-18 | house9  | 971360021 | d05     |  45000 | Manager            |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+6 rows in set (0.00 sec)
+
+
+12:-
+
+mysql> select * from Employee where emp_no in('emp1','emp2','emp6');
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp1   | Ben      | 1999-03-16 | house2  | 976431154 | d07     |   3804 | Guard              |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp6   | Gouri    | 1998-05-18 | house6  | 974259079 | d04     | 117885 | Programmer         |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+3 rows in set (0.00 sec)
+
+
+13:-
+
+mysql> select emp_no,emp_name from Employee where salary between 120000 and 300000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp2   | Arun     |
++--------+----------+
+1 row in set (0.00 sec)
+
+
+14:-
+
+mysql> select * from Employee where Designation='Manager' or Designation='Computer assistant';
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address | mobile_no | dept_no | salary | Designation        |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+| emp0   | Anu      | 1998-01-20 | house1  | 973626219 | d00     |  84852 | Computer assistant |
+| emp2   | Arun     | 1999-04-06 | house3  | 951444866 | d05     | 225650 | Computer assistant |
+| emp4   | Rishi    | 1998-02-01 | house5  | 917034694 | d04     |  45000 | Manager            |
+| emp9   | Joyal    | 1999-06-18 | house9  | 971360021 | d05     |  45000 | Manager            |
++--------+----------+------------+---------+-----------+---------+--------+--------------------+
+4 rows in set (0.00 sec)
+
+
+15:-
+
+mysql> select dept_no, COUNT(*) from Employee group by dept_no;
++---------+----------+
+| dept_no | COUNT(*) |
++---------+----------+
+| d00     |        1 |
+| d02     |        1 |
+| d04     |        2 |
+| d05     |        2 |
+| d06     |        1 |
+| d07     |        1 |
+| d09     |        1 |
++---------+----------+
+7 rows in set (0.02 sec)
+
+
+16:-
+
+mysql> select dept_no,AVG(salary) from Employee group by dept_no;
++---------+-------------+
+| dept_no | AVG(salary) |
++---------+-------------+
+| d00     |  84852.0000 |
+| d02     |   2900.0000 |
+| d04     |  81442.5000 |
+| d05     | 135325.0000 |
+| d06     |   4655.0000 |
+| d07     |   3804.0000 |
+| d09     |  44710.0000 |
++---------+-------------+
+7 rows in set (0.00 sec)
+
+
+17:-
+
+mysql> select dept_no,SUM(salary) from Employee group by dept_no;
++---------+-------------+
+| dept_no | SUM(salary) |
++---------+-------------+
+| d00     |       84852 |
+| d02     |        2900 |
+| d04     |      162885 |
+| d05     |      270650 |
+| d06     |        4655 |
+| d07     |        3804 |
+| d09     |       44710 |
++---------+-------------+++
+7 rows in set (0.00 sec)
+
+
+18:-
+mysql> select dept_no,MAX(salary) as topsalary,MIN(salary) as lowersalary from Employee group by dept_no;
++---------+-----------+-------------+
+| dept_no | topsalary | lowersalary |
++---------+-----------+-------------+
+| d00     |     84852 |       84852 |
+| d02     |      2900 |        2900 |
+| d04     |    117885 |       45000 |
+| d05     |    225650 |       45000 |
+| d06     |      4655 |        4655 |
+| d07     |      3804 |        3804 |
+| d09     |     44710 |       44710 |
++---------+-----------+-------------+
+7 rows in set (0.00 sec)
+
+
+19:-
+mysql> select dept_no,AVG(salary) from Employee where dept_no!='d05' group by dept_no;
++---------+-------------+
+| dept_no | AVG(salary) |
++---------+-------------+
+| d00     |  84852.0000 |
+| d02     |   2900.0000 |
+| d04     |  81442.5000 |
+| d06     |   4655.0000 |
+| d07     |   3804.0000 |
+| d09     |  44710.0000 |
++---------+-------------+
+6 rows in set (0.00 sec)
+
+
+20:-
+
+mysql> select dept_no,AVG(salary) as avg from Employee where dept_no!='d01' GROUP BY dept_no HAVING avg>20000 ORDER BY avg;
++---------+-------------+
+| dept_no | avg         |
++---------+-------------+
+| d09     |  44710.0000 |
+| d04     |  81442.5000 |
+| d00     |  84852.0000 |
+| d05     | 135325.0000 |
++---------+-------------+
+4 rows in set (0.03 sec)
+
+
