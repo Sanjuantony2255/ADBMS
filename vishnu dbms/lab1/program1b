@@ -1,0 +1,79 @@
+mysql> use firstb;
+Database changed
+mysql> create table employee(emp_no varchar(15),emp_name varchar(15),dob date,address varchar(30),mobile_no int,dept_no varchar(15),salary int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>  create table department(dept_no varchar(15),dept_name varchar(20),location varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_firstb |
++------------------+
+| department       |
+| employee         |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | varchar(15) | YES  |     | NULL    |       |
+| emp_name  | varchar(15) | YES  |     | NULL    |       |
+| dob       | date        | YES  |     | NULL    |       |
+| address   | varchar(30) | YES  |     | NULL    |       |
+| mobile_no | int         | YES  |     | NULL    |       |
+| dept_no   | varchar(15) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | varchar(15) | YES  |     | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
+| location  | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee add designation varchar(20);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_no      | varchar(15) | YES  |     | NULL    |       |
+| emp_name    | varchar(15) | YES  |     | NULL    |       |
+| dob         | date        | YES  |     | NULL    |       |
+| address     | varchar(30) | YES  |     | NULL    |       |
+| mobile_no   | int         | YES  |     | NULL    |       |
+| dept_no     | varchar(15) | YES  |     | NULL    |       |
+| salary      | int         | YES  |     | NULL    |       |
+| designation | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table department drop column location;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | varchar(15) | YES  |     | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+    

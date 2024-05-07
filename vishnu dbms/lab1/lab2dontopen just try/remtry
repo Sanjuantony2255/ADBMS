@@ -1,0 +1,41 @@
+mysql> insert into  employees values (01,'smith','hope','smith@gmail.com','9565654531','1989/10/09',1,150000,101,1);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into  employees values (02,'zen','hope','zen@gmail.com','9565614531','1989/11/09',1,1900000,201,2);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into  employees values (02,'john','taylor','john@gmail.com','9565314531','1990/11/09',4,230000,102,null);
+ERROR 1062 (23000): Duplicate entry '2' for key 'employees.PRIMARY'
+mysql> insert into  employees values (03,'john','taylor','john@gmail.com','9565314531','1990/11/09',4,230000,102,null);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into  employees values (04,'arjun','varma','arjun@gmail.com','8565314531','1992/11/09',3,280000,103,1);
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           3 | john       | taylor    | john@gmail.com  | 9565314531   | 1990-11-09 |      4 |  230000.00 |        102 |          NULL |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into  employees values (05,'arun','varma','arun@gmail.com','7565314531','1997/11/09',3,6000,null,2);
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           3 | john       | taylor    | john@gmail.com  | 9565314531   | 1990-11-09 |      4 |  230000.00 |        102 |          NULL |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
+|           5 | arun       | varma     | arun@gmail.com  | 7565314531   | 1997-11-09 |      3 |    6000.00 |       NULL |             2 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+5 rows in set (0.00 sec)
+
+insert into dependents values (1,'amala','arun','wife',5),(2,'akhila','arjun','child',4),(3,'hari','murali','brother',3);

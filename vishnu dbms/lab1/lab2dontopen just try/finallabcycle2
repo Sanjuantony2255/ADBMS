@@ -1,0 +1,81 @@
+ select e.first_name as employee_first_name, m.first_name as manager_first_name from employees e left join employees m  on e.manager_id= m.employee_id;
++---------------------+--------------------+
+| employee_first_name | manager_first_name |
++---------------------+--------------------+
+| smith               | smith              |
+| zen                 | smith              |
+| john                | smith              |
+| arjun               | john               |
+| arun                | john               |
++---------------------+--------------------+
+select e.first_name,e.last_name,e.department_id from employees e inner join employees t on e.department_id=t.department_id where t.last_name='taylor';
++------------+-----------+---------------+
+| first_name | last_name | department_id |
++------------+-----------+---------------+
+| zen        | hope      |             2 |
+| john       | taylor    |             2 |
+| arun       | varma     |             2 |
++------------+-----------+---------------+
+select j.job_title,e.first_name,e.last_name,(j.max_salary-e.salary) as salary_diff from employees e inner join jobs j on e.job_id=j.job_id;
++--------------------+------------+-----------+-------------+
+| job_title          | first_name | last_name | salary_diff |
++--------------------+------------+-----------+-------------+
+| stock manager      | zen        | hope      | -1891000.00 |
+| stock manager      | smith      | hope      |  -141000.00 |
+| computer Assistant | arun       | varma     |        0.00 |
+| computer Assistant | arjun      | varma     |  -274000.00 |
+| manager            | john       | taylor    |  -190000.00 |
++--------------------+------------+-----------+-------------+
+select d.department_name,AVG(e.salary) as avg_salary,COUNT(e.department_id) as no_of_employees from departments d left join employees e on d.department_id=e.department_id group by d.department_nam
+e;
++-----------------+---------------+-----------------+
+| department_name | avg_salary    | no_of_employees |
++-----------------+---------------+-----------------+
+| finance         | 215000.000000 |               2 |
+| marketing       | 712000.000000 |               3 |
+| sales           |          NULL |               0 |
+| accounting      |          NULL |               0 |
++-----------------+---------------+-----------------+
+create view v_employee_details as select e.first_name,e.last_name,e.employee_id,e.phone_number,j.job_title,d.department_name,CONCAT(m.first_name,'',m.last_name) as manager_name from employees e inner join jobs j on e.job_id=j.job_id inner join departments d on e.department_id=d.department_id left join employees m on e.manager_id=m.employee_id where d.location_id in( select location_id from locations where city='delhi');
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from v_employee_details;
++------------+-----------+-------------+--------------+--------------------+-----------------+--------------+
+| first_name | last_name | employee_id | phone_number | job_title          | department_name | manager_name |
++------------+-----------+-------------+--------------+--------------------+-----------------+--------------+
+| smith      | hope      |           1 | 9565654531   | stock manager      | finance         | smithhope    |
+| arjun      | varma     |           4 | 8565314531   | computer Assistant | finance         | johntaylor   |
++------------+-----------+-------------+--------------+--------------------+-----------------+--------------+
+select first_name ,last_name from v_employee_details where job_title='stock manager' and department_name='finance';
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| smith      | hope      |
++------------+-----------+
+update v_employee_details set phone_number='8989898989' where first_name='smith';
+ERROR 1288 (HY000): The target table v_employee_details of the UPDATE is not updatable
+select e.employee_id,e.first_name,e.last_name,e.phone_number from employees e left join dependents dep on e.employee_id=dep.employee_id where dep.employee_id is NULL;
++-------------+------------+-----------+--------------+
+| employee_id | first_name | last_name | phone_number |
++-------------+------------+-----------+--------------+
+|           1 | smith      | hope      | 9565654531   |
+|           2 | zen        | hope      | 9565614531   |
++-------------+------------+-----------+--------------+
+select * from employees where manager_id='101' union select * from employees where manager_id='201';
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+select * from employees where employee_id in (select distinct(employee_id) from employees);
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           3 | john       | taylor    | john@gmail.com  | 9565314531   | 1990-11-09 |      4 |  230000.00 |          1 |             2 |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |          3 |             1 |
+|           5 | arun       | varma     | arun@gmail.com  | 7565314531   | 1997-11-09 |      3 |    6000.00 |          3 |             2 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+

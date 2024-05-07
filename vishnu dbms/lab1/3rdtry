@@ -1,0 +1,383 @@
+use firstb;
+Database changed
+mysql> insert into department values('d07','mediahead');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into department values('d08','developer');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('d09','tester');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into department values('d10','manager');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from department;
++---------+------------+
+| dept_no | dept_name  |
++---------+------------+
+| d01     | tax        |
+| d02     | sales      |
+| d03     | finance    |
+| d04     | accounting |
+| d05     | marketing  |
+| d06     | cashier    |
+| d07     | mediahead  |
+| d08     | developer  |
+| d09     | tester     |
+| d10     | manager    |
++---------+------------+
+10 rows in set (0.00 sec)
+
+
+mysql> insert into employee values('emp1','shiju','2000/04/13','shiju villa','9889
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa | 9889898776 | d01     |   2000 | trainee     |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+1 row in set (0.00 sec)
+
+
+mysql> insert into employee values('emp2','biju','2001/04/13','biju villa','9889898376','d01',4000,'trainee');
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> insert into employee values('emp3','manu','2001/04/03','manu villa','9889898336','d02',40000,'dev');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa | 9889898776 | d01     |   2000 | trainee     |
+| emp2   | biju     | 2001-04-13 | biju villa  | 9889898376 | d01     |   4000 | trainee     |
+| emp3   | manu     | 2001-04-03 | manu villa  | 9889898336 | d02     |  40000 | dev         |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee values('emp4','shanu','2002/04/03','shanu villa','9889
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa | 9889898776 | d01     |   2000 | trainee     |
+| emp2   | biju     | 2001-04-13 | biju villa  | 9889898376 | d01     |   4000 | trainee     |
+| emp3   | manu     | 2001-04-03 | manu villa  | 9889898336 | d02     |  40000 | dev         |
+| emp4   | shanu    | 2002-04-03 | shanu villa | 9889898336 | d03     |  43000 | dev         |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+mysql> use firstb;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> insert into employee values('emp5','raju','2002/11/11','raju villa','9678595958','d04',1400000,'manager');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into employee values('emp6','arathi','2002/18/10','arathi villa','9678595968','d05',240000,'assistant manager');
+
+mysql> insert into employee values('emp6','arathi','2002/9/10','arathi villa','9678595968','d05',240000,'assistant manager');
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> insert into employee values('emp7','mahesh','2001/9/10','mahesh  villa','967889
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> insert into employee values('emp8','john','2000/6/10','john  villa','9674895968','d07',5000,'apprentice');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into employee values('emp9','arun','2000/6/10','arun  villa','8874895968','d08',6000,'apprentice');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+);
+
+mysql> insert into employee values('emp10','arjun','2000/6/10','arjun villa','887
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employee;
++--------+----------+------------+---------------+------------+---------+---------+--------------------+
+| emp_no | emp_name | dob        | address       | mobile_no  | dept_no | salary  | designation        |
++--------+----------+------------+---------------+------------+---------+---------+--------------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa   | 9889898776 | d01     |    2000 | trainee            |
+| emp10  | arjun    | 2000-06-10 | arjun villa   | 8876896968 | d09     |   15000 | computer assistant |
+| emp2   | biju     | 2001-04-13 | biju villa    | 9889898376 | d01     |    4000 | trainee            |
+| emp3   | manu     | 2001-04-03 | manu villa    | 9889898336 | d02     |   40000 | dev                |
+| emp4   | shanu    | 2002-04-03 | shanu villa   | 9889898336 | d03     |   43000 | dev                |
+| emp5   | raju     | 2002-11-11 | raju villa    | 9678595958 | d04     | 1400000 | manager            |
+| emp6   | arathi   | 2002-09-10 | arathi villa  | 9678595968 | d05     |  240000 | assistant manager  |
+| emp7   | mahesh   | 2001-09-10 | mahesh  villa | 9678895968 | d06     |    2400 | apprentice         |
+| emp8   | john     | 2000-06-10 | john  villa   | 9674895968 | d07     |    5000 | apprentice         |
+| emp9   | arun     | 2000-06-10 | arun  villa   | 8874895968 | d08     |    6000 | apprentice         |
++--------+----------+------------+---------------+------------+---------+---------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> mysql> select * from department;
++---------+------------+
+| dept_no | dept_name  |
++---------+------------+
+| d01     | tax        |
+| d02     | sales      |
+| d03     | finance    |
+| d04     | accounting |
+| d05     | marketing  |
+| d06     | cashier    |
+| d07     | mediahead  |
+| d08     | developer  |
+| d09     | tester     |
+| d10     | manager    |
++---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_no,name from department where dept_no = 'd02';
+ERROR 1054 (42S22): Unknown column 'emp_no' in 'field list'
+mysql> select emp_no,name from employee where dept_no = 'd02';
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select emp_no,emp_name from employee where dept_no = 'd02';
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp3   | manu     |
++--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_no,emp_name,designation,dept_no,salary from employee order by salary desc;
++--------+----------+--------------------+---------+---------+
+| emp_no | emp_name | designation        | dept_no | salary  |
++--------+----------+--------------------+---------+---------+
+| emp5   | raju     | manager            | d04     | 1400000 |
+| emp6   | arathi   | assistant manager  | d05     |  240000 |
+| emp4   | shanu    | dev                | d03     |   43000 |
+| emp3   | manu     | dev                | d02     |   40000 |
+| emp10  | arjun    | computer assistant | d09     |   15000 |
+| emp9   | arun     | apprentice         | d08     |    6000 |
+| emp8   | john     | apprentice         | d07     |    5000 |
+| emp2   | biju     | trainee            | d01     |    4000 |
+| emp7   | mahesh   | apprentice         | d06     |    2400 |
+| emp1   | shiju    | trainee            | d01     |    2000 |
++--------+----------+--------------------+---------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from employee where salary>=2000 and salary<=5000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp1   | shiju    |
+| emp2   | biju     |
+| emp7   | mahesh   |
+| emp8   | john     |
++--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select distinct designation from employee;
++--------------------+
+| designation        |
++--------------------+
+| trainee            |
+| computer assistant |
+| dev                |
+| manager            |
+| assistant manager  |
+| apprentice         |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> update employee set salary='45000' where designation='manager';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> desc employee;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| emp_no      | varchar(15)   | NO   | PRI | NULL    |       |
+| emp_name    | varchar(15)   | YES  |     | NULL    |       |
+| dob         | date          | YES  |     | NULL    |       |
+| address     | varchar(30)   | YES  |     | NULL    |       |
+| mobile_no   | decimal(10,0) | YES  |     | NULL    |       |
+| dept_no     | varchar(15)   | YES  | MUL | NULL    |       |
+| salary      | int           | YES  |     | NULL    |       |
+| designation | varchar(20)   | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address       | mobile_no  | dept_no | salary | designation        |
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa   | 9889898776 | d01     |   2000 | trainee            |
+| emp10  | arjun    | 2000-06-10 | arjun villa   | 8876896968 | d09     |  15000 | computer assistant |
+| emp2   | biju     | 2001-04-13 | biju villa    | 9889898376 | d01     |   4000 | trainee            |
+| emp3   | manu     | 2001-04-03 | manu villa    | 9889898336 | d02     |  40000 | dev                |
+| emp4   | shanu    | 2002-04-03 | shanu villa   | 9889898336 | d03     |  43000 | dev                |
+| emp5   | raju     | 2002-11-11 | raju villa    | 9678595958 | d04     |  45000 | manager            |
+| emp6   | arathi   | 2002-09-10 | arathi villa  | 9678595968 | d05     | 240000 | assistant manager  |
+| emp7   | mahesh   | 2001-09-10 | mahesh  villa | 9678895968 | d06     |   2400 | apprentice         |
+| emp8   | john     | 2000-06-10 | john  villa   | 9674895968 | d07     |   5000 | apprentice         |
+| emp9   | arun     | 2000-06-10 | arun  villa   | 8874895968 | d08     |   6000 | apprentice         |
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+10 rows in set (0.00 sec)
+
+mysql> update employee set mobile_no='7878675645' where emp_name='john';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee where emp_name='john';
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+| emp8   | john     | 2000-06-10 | john  villa | 7878675645 | d07     |   5000 | apprentice  |
++--------+----------+------------+-------------+------------+---------+--------+-------------+
+1 row in set (0.00 sec)
+
+mysql> delete from employee where salary='7000';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select emp_name,mobile_no from employee where emp_name like 'a%';
++----------+------------+
+| emp_name | mobile_no  |
++----------+------------+
+| arjun    | 8876896968 |
+| arathi   | 9678595968 |
+| arun     | 8874895968 |
++----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where emp_no in('emp1','emp2','emp6');
++--------+----------+------------+--------------+------------+---------+--------+-------------------+
+| emp_no | emp_name | dob        | address      | mobile_no  | dept_no | salary | designation       |
++--------+----------+------------+--------------+------------+---------+--------+-------------------+
+| emp1   | shiju    | 2000-04-13 | shiju villa  | 9889898776 | d01     |   2000 | trainee           |
+| emp2   | biju     | 2001-04-13 | biju villa   | 9889898376 | d01     |   4000 | trainee           |
+| emp6   | arathi   | 2002-09-10 | arathi villa | 9678595968 | d05     | 240000 | assistant manager |
++--------+----------+------------+--------------+------------+---------+--------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where length(emp_name)>=3 and salary>2000;
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address       | mobile_no  | dept_no | salary | designation        |
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+| emp10  | arjun    | 2000-06-10 | arjun villa   | 8876896968 | d09     |  15000 | computer assistant |
+| emp2   | biju     | 2001-04-13 | biju villa    | 9889898376 | d01     |   4000 | trainee            |
+| emp3   | manu     | 2001-04-03 | manu villa    | 9889898336 | d02     |  40000 | dev                |
+| emp4   | shanu    | 2002-04-03 | shanu villa   | 9889898336 | d03     |  43000 | dev                |
+| emp5   | raju     | 2002-11-11 | raju villa    | 9678595958 | d04     |  45000 | manager            |
+| emp6   | arathi   | 2002-09-10 | arathi villa  | 9678595968 | d05     | 240000 | assistant manager  |
+| emp7   | mahesh   | 2001-09-10 | mahesh  villa | 9678895968 | d06     |   2400 | apprentice         |
+| emp8   | john     | 2000-06-10 | john  villa   | 7878675645 | d07     |   5000 | apprentice         |
+| emp9   | arun     | 2000-06-10 | arun  villa   | 8874895968 | d08     |   6000 | apprentice         |
++--------+----------+------------+---------------+------------+---------+--------+--------------------+
+9 rows in set (0.00 sec)
+
+mysql> mysql> select emp_no,emp_name from employee where salary between 120000 and 300000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| emp6   | arathi   |
++--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where designation ='manager' or designation='computer assistant';
++--------+----------+------------+-------------+------------+---------+--------+--------------------+
+| emp_no | emp_name | dob        | address     | mobile_no  | dept_no | salary | designation        |
++--------+----------+------------+-------------+------------+---------+--------+--------------------+
+| emp10  | arjun    | 2000-06-10 | arjun villa | 8876896968 | d09     |  15000 | computer assistant |
+| emp5   | raju     | 2002-11-11 | raju villa  | 9678595958 | d04     |  45000 | manager            |
++--------+----------+------------+-------------+------------+---------+--------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> select dept_no,count(*) as num_employee from employee group by dept_no;
++---------+--------------+
+| dept_no | num_employee |
++---------+--------------+
+| d01     |            2 |
+| d02     |            1 |
+| d03     |            1 |
+| d04     |            1 |
+| d05     |            1 |
+| d06     |            1 |
+| d07     |            1 |
+| d08     |            1 |
+| d09     |            1 |
++---------+--------------+
+9 rows in set (0.04 sec)
+
+mysql> select dept_no,avg(salary) as avg_salary from employee group by dept_no;
++---------+-------------+
+| dept_no | avg_salary  |
++---------+-------------+
+| d01     |   3000.0000 |
+| d02     |  40000.0000 |
+| d03     |  43000.0000 |
+| d04     |  45000.0000 |
+| d05     | 240000.0000 |
+| d06     |   2400.0000 |
+| d07     |   5000.0000 |
+| d08     |   6000.0000 |
+| d09     |  15000.0000 |
++---------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> select dept_no,sum(salary) as total_salary from employee group by dept_no;
++---------+--------------+
+| dept_no | total_salary |
++---------+--------------+
+| d01     |         6000 |
+| d02     |        40000 |
+| d03     |        43000 |
+| d04     |        45000 |
+| d05     |       240000 |
+| d06     |         2400 |
+| d07     |         5000 |
+| d08     |         6000 |
+| d09     |        15000 |
++---------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> select dept_no,max(salary) as top_salary,min(salary) as lower_salary from employee group by dept_no;
++---------+------------+--------------+
+| dept_no | top_salary | lower_salary |
++---------+------------+--------------+
+| d01     |       4000 |         2000 |
+| d02     |      40000 |        40000 |
+| d03     |      43000 |        43000 |
+| d04     |      45000 |        45000 |
+| d05     |     240000 |       240000 |
+| d06     |       2400 |         2400 |
+| d07     |       5000 |         5000 |
+| d08     |       6000 |         6000 |
+| d09     |      15000 |        15000 |
++---------+------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> select avg(salary) as avg_salary from employee where dept_no != 'd05';
++------------+
+| avg_salary |
++------------+
+| 18044.4444 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select dept_no,avg(salary) as avg_salary from employee where dept_no !='d01' group by dept_no having avg_salary>20000 order by avg_salary asc;
++---------+-------------+
+| dept_no | avg_salary  |
++---------+-------------+
+| d02     |  40000.0000 |
+| d03     |  43000.0000 |
+| d04     |  45000.0000 |
+| d05     | 240000.0000 |
++---------+-------------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+

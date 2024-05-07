@@ -1,0 +1,190 @@
+mysql> create database labcycle2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use labcycle2;
+Database changed
+mysql> create table jobs(job_id int PRIMARY KEY,job_title varchar(45)not null,min_salary decimal(10,2),max_salary decimal(10,2));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc jobs;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| job_id     | int           | NO   | PRI | NULL    |       |
+| job_title  | varchar(45)   | NO   |     | NULL    |       |
+| min_salary | decimal(10,2) | YES  |     | NULL    |       |
+| max_salary | decimal(10,2) | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create table regions(region_id int primary key,region_name varchar(40) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc regions;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| region_id   | int         | NO   | PRI | NULL    |       |
+| region_name | varchar(40) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table countries(country_id int primary key,country_name varchar(40) not null,region_id int,foreign key(region_id) references regions(region_id));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | NO   | PRI | NULL    |       |
+| country_name | varchar(40) | NO   |     | NULL    |       |
+| region_id    | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> create table locations(location_id int primary key,street_address varchar(50) not null,postal_code varchar(40) not null,city varchar(40) not null,state_province varchar(40) not null,country_id int,foreign key(country_id) references countries(country_id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc locations;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| location_id    | int         | NO   | PRI | NULL    |       |
+| street_address | varchar(50) | NO   |     | NULL    |       |
+| postal_code    | varchar(40) | NO   |     | NULL    |       |
+| city           | varchar(40) | NO   |     | NULL    |       |
+| state_province | varchar(40) | NO   |     | NULL    |       |
+| country_id     | int         | YES  | MUL | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+mysql> create table departments(department_id int primary key,department_name varchar(40) not null,location_id int,foreign key(location_id) references locations(location_id));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc departments;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| department_id   | int         | NO   | PRI | NULL    |       |
+| department_name | varchar(40) | NO   |     | NULL    |       |
+| location_id     | int         | YES  | MUL | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table employees(employee_id int primary key,first_name varchar(40) not null,last_name varchar(24) not null,email varchar(40) not null,phone_number varchar(25) not null,hire_date date,job_id int,foreign key(job_id) references jobs(job_id),salary decimal(10,2),manager_id int,department_id int,foreign key(department_id) references departments(department_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc employees;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| employee_id   | int           | NO   | PRI | NULL    |       |
+| first_name    | varchar(40)   | NO   |     | NULL    |       |
+| last_name     | varchar(24)   | NO   |     | NULL    |       |
+| email         | varchar(40)   | NO   |     | NULL    |       |
+| phone_number  | varchar(25)   | NO   |     | NULL    |       |
+| hire_date     | date          | YES  |     | NULL    |       |
+| job_id        | int           | YES  | MUL | NULL    |       |
+| salary        | decimal(10,2) | YES  |     | NULL    |       |
+| manager_id    | int           | YES  |     | NULL    |       |
+| department_id | int           | YES  | MUL | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table dependents(dependent_id int primary key,first_name varchar(40) not null,last_name varchar(40) not null,relationship varchar(40),employee_id int,foreign key(employee_id) references employees(employee_id));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc dependents;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| dependent_id | int         | NO   | PRI | NULL    |       |
+| first_name   | varchar(40) | NO   |     | NULL    |       |
+| last_name    | varchar(40) | NO   |     | NULL    |       |
+| relationship | varchar(40) | YES  |     | NULL    |       |
+| employee_id  | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> INSERT INTO jobs VALUES (1,'stock manager',4200.00,9000.00),(2,'developer',8200.00,16000.00),(3,'computer Assistant',3000.00,6000.00),(4,'manager',20000.00,40000.00),(5,'vice manager',15000.00,3000);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from jobs;
++--------+--------------------+------------+------------+
+| job_id | job_title          | min_salary | max_salary |
++--------+--------------------+------------+------------+
+|      1 | stock manager      |    4200.00 |    9000.00 |
+|      2 | developer          |    8200.00 |   16000.00 |
+|      3 | computer Assistant |    3000.00 |    6000.00 |
+|      4 | manager            |   20000.00 |   40000.00 |
+|      5 | vice manager       |   15000.00 |   30000.00 |
++--------+--------------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into regions  values (1,'Europe'), (2,'America'), (3,'Asia'), (4,'Middle East and Africa');
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from regions;
++-----------+------------------------+
+| region_id | region_name            |
++-----------+------------------------+
+|         1 | Europe                 |
+|         2 | America                |
+|         3 | Asia                   |
+|         4 | Middle East and Africa |
++-----------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into countries values (1,'india',3),(2,'china',3),(3,'switzerland',1),(4,'canada',2),(5,'brazil',2),(6,'sharja',4);
+Query OK, 6 rows affected (0.05 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from countries;
++------------+--------------+-----------+
+| country_id | country_name | region_id |
++------------+--------------+-----------+
+|          1 | india        |         3 |
+|          2 | china        |         3 |
+|          3 | switzerland  |         1 |
+|          4 | canada       |         2 |
+|          5 | brazil       |         2 |
+|          6 | sharja       |         4 |
++------------+--------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> insert into locations values(1700,'001 juma street','890901','delhi','new delhi',1),(1500,'2014 Jabberwocky Rd','26192','southlake','santiago',5),(1300,'147 Spadina Ave','M5V 2L7','Toronto','Ontario','4'),(1100,'sharja road 1500','488133','sharja palace','new sharja',6),(2500,'Magdalen Centre, The Oxford Science Park','OX9 9ZB','Oxford','Oxford','3');
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from locations;
++-------------+------------------------------------------+-------------+---------------+----------------+------------+
+| location_id | street_address                           | postal_code | city          | state_province | country_id |
++-------------+------------------------------------------+-------------+---------------+----------------+------------+
+|        1100 | sharja road 1500                         | 488133      | sharja palace | new sharja     |          6 |
+|        1300 | 147 Spadina Ave                          | M5V 2L7     | Toronto       | Ontario        |          4 |
+|        1500 | 2014 Jabberwocky Rd                      | 26192       | southlake     | santiago       |          5 |
+|        1700 | 001 juma street                          | 890901      | delhi         | new delhi      |          1 |
+|        2500 | Magdalen Centre, The Oxford Science Park | OX9 9ZB     | Oxford        | Oxford         |          3 |
++-------------+------------------------------------------+-------------+---------------+----------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into departments  values (1,'finance',1700),(2,'marketing',1100),(3,'sales',1500),(4,'accounting',1100);
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from departments;
++---------------+-----------------+-------------+
+| department_id | department_name | location_id |
++---------------+-----------------+-------------+
+|             1 | finance         |        1700 |
+|             2 | marketing       |        1100 |
+|             3 | sales           |        1500 |
+|             4 | accounting      |        1100 |
++---------------+-----------------+-------------+
+4 rows in set (0.00 sec)
+

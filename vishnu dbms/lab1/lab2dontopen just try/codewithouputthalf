@@ -1,0 +1,245 @@
+mysql> insert into  employees values (01,'smith','hope','smith@gmail.com','9565654531','1989/10/09',1,150000,101,1);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into  employees values (02,'zen','hope','zen@gmail.com','9565614531','1989/11/09',1,1900000,201,2);
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into  employees values (02,'john','taylor','john@gmail.com','9565314531','1990/11/09',4,230000,102,null);
+ERROR 1062 (23000): Duplicate entry '2' for key 'employees.PRIMARY'
+mysql> insert into  employees values (03,'john','taylor','john@gmail.com','9565314531','1990/11/09',4,230000,102,null);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into  employees values (04,'arjun','varma','arjun@gmail.com','8565314531','1992/11/09',3,280000,103,1);
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           3 | john       | taylor    | john@gmail.com  | 9565314531   | 1990-11-09 |      4 |  230000.00 |        102 |          NULL |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into  employees values (05,'arun','varma','arun@gmail.com','7565314531','1997/11/09',3,6000,null,2);
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           3 | john       | taylor    | john@gmail.com  | 9565314531   | 1990-11-09 |      4 |  230000.00 |        102 |          NULL |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
+|           5 | arun       | varma     | arun@gmail.com  | 7565314531   | 1997-11-09 |      3 |    6000.00 |       NULL |             2 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> desc dependents;
+desc dependents;
+^C
+mysql> desc dependents;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| dependent_id | int         | NO   | PRI | NULL    |       |
+| first_name   | varchar(40) | NO   |     | NULL    |       |
+| last_name    | varchar(40) | NO   |     | NULL    |       |
+| relationship | varchar(40) | YES  |     | NULL    |       |
+| employee_id  | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into dependents values (1,'amala','arun','wife',5),(2,'akhila','arjun','child',4),(3,'hari','murali','brother',3);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from dependents;
++--------------+------------+-----------+--------------+-------------+
+| dependent_id | first_name | last_name | relationship | employee_id |
++--------------+------------+-----------+--------------+-------------+
+|            1 | amala      | arun      | wife         |           5 |
+|            2 | akhila     | arjun     | child        |           4 |
+|            3 | hari       | murali    | brother      |           3 |
++--------------+------------+-----------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees where department_id in (select department_id from departments where location_id='1700');
++-------------+------------+-----------+-----------------+--------------+------------+--------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary    | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+-----------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 | 150000.00 |        101 |             1 |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 | 280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+-----------+------------+---------------+
+2 rows in set (0.04 sec)
+
+mysql> select * from employees where department_id in (select department_id from departments where location_id!='1700');
++-------------+------------+-----------+----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email          | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+----------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com  | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           5 | arun       | varma     | arun@gmail.com | 7565314531   | 1997-11-09 |      3 |    6000.00 |       NULL |             2 |
++-------------+------------+-----------+----------------+--------------+------------+--------+------------+------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employees where salary = (select max(salary) from employees);
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees where salary > (select avg(salary) from employees);
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
++-------------+------------+-----------+---------------+--------------+------------+--------+------------+------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select department_id,department_name from departments where exists (select 1 from employees where salary>10000);
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | finance         |
+|             2 | marketing       |
+|             3 | sales           |
+|             4 | accounting      |
++---------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select d.department_id,d.department_name from Department d WHERE EXISTS(select 1 from Employees e where e.department_id =d.department AND e.salary >10000);
+ERROR 1146 (42S02): Table 'labcycle2.Department' doesn't exist
+mysql> select d.department_id,d.department_name from departments d WHERE EXISTS(select 1 from Employees e where e.department_id =d.department AND e.salary >10000);
+ERROR 1146 (42S02): Table 'labcycle2.Employees' doesn't exist
+mysql> select d.department_id,d.department_name from departments d WHERE EXISTS(select 1 from employees e where e.department_id =d.department AND e.salary >10000);
+ERROR 1054 (42S22): Unknown column 'd.department' in 'where clause'
+mysql> select d.department_id,d.department_name from departments d WHERE EXISTS(select 1 from employees e where e.department_id =d.department_id AND e.salary >10000);
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | finance         |
+|             2 | marketing       |
++---------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select d.department_id,d.department_name from departments d WHERE not EXISTS(select 1 from employees e where e.department_id =d.department_id AND e.salary >10000);
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             3 | sales           |
+|             4 | accounting      |
++---------------+-----------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from employees e where salary > (select min(salary) from employees where d.department_id=e.department_id);
+ERROR 1054 (42S22): Unknown column 'd.department_id' in 'where clause'
+mysql> select * from employees e where salary > (select min(salary) from employees where department_id=e.department_id);
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employees e where salary >= (select max(salary) from employees where department_id=e.department_id);
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(dept_salary) as overall_avg_salary from(select department_id,avg(salary) as dept_salary from employees group by department_id)as totalavgsalary;
++--------------------+
+| overall_avg_salary |
++--------------------+
+|  466000.0000000000 |
++--------------------+
+select employee_id,first_name,last_name,salary,(select round(avg(salary)) from employees)as avg_salary,salary-(select round(avg(salary)) from employees)as difference from employees;
++-------------+------------+-----------+------------+------------+------------+
+| employee_id | first_name | last_name | salary     | avg_salary | difference |
++-------------+------------+-----------+------------+------------+------------+
+|           1 | smith      | hope      |  150000.00 |     513200 | -363200.00 |
+|           2 | zen        | hope      | 1900000.00 |     513200 | 1386800.00 |
+|           3 | john       | taylor    |  230000.00 |     513200 | -283200.00 |
+|           4 | arjun      | varma     |  280000.00 |     513200 | -233200.00 |
+|           5 | arun       | varma     |    6000.00 |     513200 | -507200.00 |
++-------------+------------+-----------+------------+------------+------------+
+select e.*from employees e where e.salary>(select avg(salary) from employees e2 where e2.department_id = e.department_id);
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
+|           4 | arjun      | varma     | arjun@gmail.com | 8565314531   | 1992-11-09 |      3 |  280000.00 |        103 |             1 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+
+select * from employees where employee_id not in (select employee_id  from dependents);
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+| employee_id | first_name | last_name | email           | phone_number | hire_date  | job_id | salary     | manager_id | department_id |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+|           1 | smith      | hope      | smith@gmail.com | 9565654531   | 1989-10-09 |      1 |  150000.00 |        101 |             1 |
+|           2 | zen        | hope      | zen@gmail.com   | 9565614531   | 1989-11-09 |      1 | 1900000.00 |        201 |             2 |
++-------------+------------+-----------+-----------------+--------------+------------+--------+------------+------------+---------------+
+select e.first_name,e.last_name,d.department_name from employees e join departments d on e.department_id=d.department_id where e.department_id in(1,2,3);
++------------+-----------+-----------------+
+| first_name | last_name | department_name |
++------------+-----------+-----------------+
+| smith      | hope      | finance         |
+| arjun      | varma     | finance         |
+| zen        | hope      | marketing       |
+| arun       | varma     | marketing       |
++------------+-----------+-----------------+
+select e.first_name,e.last_name,d.department_name from employees e join departments d on e.department_id=d.department_id where e.department_id in(1,2,3) and e.salary>10000;
++------------+-----------+-----------------+
+| first_name | last_name | department_name |
++------------+-----------+-----------------+
+| smith      | hope      | finance         |
+| arjun      | varma     | finance         |
+| zen        | hope      | marketing       |
++------------+-----------+-----------------+
+select d.department_name,l.street_address,l.postal_code,c.country_name,r.region_name from departments d join locations l on d.location_id=l.location_id join countries c on l.country_id = c.country_id join regions r on c.region_id = r.region_id;
++-----------------+---------------------+-------------+--------------+------------------------+
+| department_name | street_address      | postal_code | country_name | region_name            |
++-----------------+---------------------+-------------+--------------+------------------------+
+| finance         | 001 juma street     | 890901      | india        | Asia                   |
+| marketing       | sharja road 1500    | 488133      | sharja       | Middle East and Africa |
+| sales           | 2014 Jabberwocky Rd | 26192       | brazil       | America                |
+| accounting      | sharja road 1500    | 488133      | sharja       | Middle East and Africa |
++-----------------+---------------------+-------------+--------------+------------------------+
+select e.first_name,e.last_name,d.department_id,d.department_name from employees e left join departments d on e.department_id=d.department_id;
++------------+-----------+---------------+-----------------+
+| first_name | last_name | department_id | department_name |
++------------+-----------+---------------+-----------------+
+| smith      | hope      |             1 | finance         |
+| zen        | hope      |             2 | marketing       |
+| john       | taylor    |          NULL | NULL            |
+| arjun      | varma     |             1 | finance         |
+| arun       | varma     |             2 | marketing       |
++------------+-----------+---------------+-----------------+
+5 rows in set (0.00 sec)
+select e.first_name,e.last_name,d.department_id,d.department_name,l.city,l.state_province from employees e join departments d on e.department_id=d.department_id join locations l on d.location_id=l.location_id where e.first_name like '%Z%';
++------------+-----------+---------------+-----------------+---------------+----------------+
+| first_name | last_name | department_id | department_name | city          | state_province |
++------------+-----------+---------------+-----------------+---------------+----------------+
+| zen        | hope      |             2 | marketing       | sharja palace | new sharja     |
++------------+-----------+---------------+-----------------+---------------+----------------+
+select e.first_name,e.last_name,d.department_id,d.department_name from departments d left join employees e on d.department_id=e.department_id;
++------------+-----------+---------------+-----------------+
+| first_name | last_name | department_id | department_name |
++------------+-----------+---------------+-----------------+
+| arjun      | varma     |             1 | finance         |
+| smith      | hope      |             1 | finance         |
+| arun       | varma     |             2 | marketing       |
+| zen        | hope      |             2 | marketing       |
+| NULL       | NULL      |             3 | sales           |
+| NULL       | NULL      |             4 | accounting      |
++------------+-----------+---------------+-----------------+
+
+
